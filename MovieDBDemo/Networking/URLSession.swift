@@ -6,10 +6,21 @@
 //  Copyright © 2017 Abdul. All rights reserved.
 //
 
-import Foundation
-import Alamofire
+import UIKit
 
 public typealias CompletionHandler = (_ result: Any?, _ data: Data?, _ error: Error?) -> Void
+
+public enum HTTPMethod: String {
+    case options = "OPTIONS"
+    case get     = "GET"
+    case head    = "HEAD"
+    case post    = "POST"
+    case put     = "PUT"
+    case patch   = "PATCH"
+    case delete  = "DELETE"
+    case trace   = "TRACE"
+    case connect = "CONNECT"
+}
 
 class NetworkingClass {
 
@@ -37,14 +48,8 @@ class NetworkingClass {
         }
         
         self.session = URLSession(configuration: config)
-        
-        do {
-            urlRequest = try URLRequest(url: urlString,
-                                        method: method,
-                                        headers: nil)
-        } catch {
-            print("Some error occurred")
-        }
+        urlRequest = URLRequest(url: urlString)
+        urlRequest?.httpMethod = method.rawValue
     }
     
     @discardableResult

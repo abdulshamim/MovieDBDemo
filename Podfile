@@ -6,9 +6,7 @@ target 'MovieDBDemo' do
   use_frameworks!
 
   # Pods for MovieDBDemo
-   pod 'Alamofire', '~> 4.2.0'
+  # pod 'Alamofire', '~> 4.2.0'
    pod 'Kingfisher'
-   #pod 'AFNetworking', '~> 3.0'
-   #pod 'MBProgressHUD'
    
 end
