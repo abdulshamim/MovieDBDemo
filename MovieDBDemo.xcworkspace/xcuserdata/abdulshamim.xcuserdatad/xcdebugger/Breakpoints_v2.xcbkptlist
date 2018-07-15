@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-            timestampString = "553361147.372453"
+            timestampString = "553375316.001364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "collectionView(_:willDisplay:forItemAt:)"
             landmarkType = "7">
             <Locations>
@@ -106,12 +106,12 @@
                   moduleName = "MovieDBDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abdulshamim/Documents/Github%20Projects/MovieDBDemo/MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-                  timestampString = "553361010.8743089"
+                  timestampString = "553374611.083068"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "1296">
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "1358">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -121,12 +121,12 @@
                   moduleName = "MovieDBDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abdulshamim/Documents/Github%20Projects/MovieDBDemo/MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-                  timestampString = "553361010.8778239"
+                  timestampString = "553374611.087088"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "2231">
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "2309">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -138,60 +138,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-            timestampString = "553361147.373036"
+            timestampString = "553375316.00185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "getMovies(page:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieDBDemo.MoviesCollectionController.getMovies(page: Swift.Int) -&gt; ()"
-                  moduleName = "MovieDBDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abdulshamim/Documents/Github%20Projects/MovieDBDemo/MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-                  timestampString = "553361010.886048"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;MovieDBDemo.Movies&gt;, Swift.Bool) -&gt; () in MovieDBDemo.MoviesCollectionController.getMovies(page: Swift.Int) -&gt; ()"
-                  moduleName = "MovieDBDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abdulshamim/Documents/Github%20Projects/MovieDBDemo/MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-                  timestampString = "553361010.8903199"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;MovieDBDemo.Movies&gt;, Swift.Bool) -&gt; () in MovieDBDemo.MoviesCollectionController.getMovies(page: Swift.Int) -&gt; ()"
-                  moduleName = "MovieDBDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abdulshamim/Documents/Github%20Projects/MovieDBDemo/MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-                  timestampString = "553361010.8938709"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -201,12 +154,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
-            timestampString = "553361147.373445"
+            timestampString = "553375316.002123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "showSettingView()"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "collectionView(_:willDisplay:forItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieDBDemo/View&amp;Controllers/MoviesCollection/MoviesCollectionController.swift"
+            timestampString = "553375316.0023659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "collectionView(_:willDisplay:forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

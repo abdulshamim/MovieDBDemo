@@ -12,6 +12,11 @@
 
 import Foundation
 
+class MoviesManager {
+    static let shared = MoviesManager()
+    var selectedMovie: Result?
+}
+
 class Movies: Codable {
     var page: Int?
     var totalResults: Int?

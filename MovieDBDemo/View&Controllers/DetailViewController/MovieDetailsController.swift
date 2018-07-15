@@ -11,21 +11,14 @@ import UIKit
 class MovieDetailsController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var movie: Result?
-    
+
     var movieDetailsPresenter: MovieDetailsPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         movieDetailsPresenter = MovieDetailsPresenter(viewController: self)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        self.title = movie?.originalTitle
-        movieDetailsPresenter?.setTableView()
+        movieDetailsPresenter?.setView(vc: self)
     }
-
-
 }
 
 extension MovieDetailsController: UITableViewDataSource {
@@ -35,10 +28,10 @@ extension MovieDetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell", for: indexPath) as? MovieDetailCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.movieDetailCell, for: indexPath) as? MovieDetailCell else {
             fatalError("cell not found")
         }
-        cell.setUpData(movie: self.movie)
+        cell.setUpData(movie: MoviesManager.shared.selectedMovie)
         return cell
     }
     

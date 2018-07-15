@@ -18,7 +18,12 @@ class MovieDetailsPresenter: NSObject {
         self.movieDetailsController = viewController
     }
     
-    func setTableView() {
+    func setView(vc: MovieDetailsController) {
+        if #available(iOS 11.0, *) {
+            vc.navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+        }
+        vc.title = MoviesManager.shared.selectedMovie?.originalTitle
         movieDetailsController?.tableView.dataSource = movieDetailsController
         movieDetailsController?.tableView.separatorStyle = .none
         movieDetailsController?.tableView.estimatedRowHeight = 550

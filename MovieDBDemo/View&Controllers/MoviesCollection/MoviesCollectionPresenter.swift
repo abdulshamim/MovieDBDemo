@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 class MoviesCollectionPresenter: NSObject {
 
     var popularMoviesPageCount: Int? = 1
@@ -23,28 +20,46 @@ class MoviesCollectionPresenter: NSObject {
     var movies: Movies?
     var moviesType: MoviesType = .popular
     
+    var isSettingOpened = false
+    
+    
     weak var moviesCollectionController: MoviesCollectionController?
     
     override init() {
-        
     }
     
     init(viewController: MoviesCollectionController) {
         super.init()
     }
     
-    //SetUp Naviation controller
+    // MARK : Set controller tilte
+    func setTitle(vc: MoviesCollectionController) {
+        switch moviesType {
+        case .popular:
+            vc.title = ListType.popular
+        case .topRated:
+            vc.title = ListType.topRated
+        }
+    }
+    
+    // MARK : SetUp Naviation controller
     func setUpNavigationBar(vc: MoviesCollectionController) {
         vc.title = ListType.popular
-        vc.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            vc.navigationController?.navigationBar.prefersLargeTitles = true
+            vc.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        } else {
+            // Fallback on earlier versions
+        }
+        
         vc.navigationController?.navigationBar.barTintColor = UIColor.red
         vc.navigationController?.navigationBar.tintColor = .white
         vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        vc.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+       
     }
     
    
-    
+    // MARK : Get Api path for popular and top rated
     func getFullPath() -> String {
         switch moviesType {
         case .popular:
@@ -54,6 +69,7 @@ class MoviesCollectionPresenter: NSObject {
         }
     }
     
+    // MARK : Get movies from tmdb server
     func getMovies(pageCount: Int, callBack : @escaping (_ result: Movies?, _ isSuccess: Bool) -> Void) {
         let path = getFullPath() + "&language=en-US&page=\(pageCount)"
         print(path)
@@ -90,12 +106,12 @@ class MoviesCollectionPresenter: NSObject {
                 }
                 
                 callBack(self.movies! , true)
-                
         }
         
     }
     
     
+    // MARK : Search movies on tmdb server
     func searchMovie(query: String, callBack : @escaping (_ result: Movies?, _ isSuccess: Bool) -> Void) {
         let searchTerm =  "&query=\(query)"
         let path = API.Path.search + searchTerm
@@ -123,7 +139,6 @@ class MoviesCollectionPresenter: NSObject {
                 self.searchedMovies = Movies(json: response)
                 print(self.movies ?? "Movie not found")
                 callBack(self.movies! , true)
-                
         }
     }
 }

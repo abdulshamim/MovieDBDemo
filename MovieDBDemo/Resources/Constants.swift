@@ -32,3 +32,10 @@ enum MoviesType: Int{
     case popular = 0
     case topRated = 1
 }
+
+struct Identifier {
+    static let moviesCollectionCell = "MoviesCollectionCell"
+    static let movieDetailsController = "MovieDetailsController"
+    
+    static let movieDetailCell = "MovieDetailCell"
+}

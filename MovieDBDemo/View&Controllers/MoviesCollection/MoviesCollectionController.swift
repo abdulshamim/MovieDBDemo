@@ -19,7 +19,7 @@ class MoviesCollectionController: UIViewController {
     @IBOutlet weak var settingViewHeight: NSLayoutConstraint!
     
     var searchActive : Bool = false
-    var isSettingOpened = false
+   // var isSettingOpened = false
     
     
     var presenter: MoviesCollectionPresenter?
@@ -49,7 +49,7 @@ class MoviesCollectionController: UIViewController {
     }
     
     @objc func settingsView() {
-        if isSettingOpened {
+        if presenter?.isSettingOpened == true {
             self.hideSettingView()
         } else {
             self.showSettingView()
@@ -66,24 +66,25 @@ class MoviesCollectionController: UIViewController {
         presenter?.setUpNavigationBar(vc: self)
     }
     
-
+    //Get popular movies
     @IBAction func getPopularMovieList(_ sender: UIButton) {
         self.collectionView.reloadData()
         self.presenter?.moviesType = .popular
-        self.title = ListType.popular
+        self.presenter?.setTitle(vc: self)
         self.getMovies(page: (self.presenter?.popularMoviesPageCount) ?? 1)
     }
     
+    //Get top rated movies
     @IBAction func getTopRatedMoviesList(_ sender: UIButton) {
         self.collectionView.reloadData()
         self.presenter?.moviesType = .topRated
-        self.title = ListType.topRated
+        self.presenter?.setTitle(vc: self)
         self.getMovies(page: (self.presenter?.topRatedPageCount) ?? 1)
     }
     
-    //Shoe setting View
+    //Show setting View
     func showSettingView() {
-        self.isSettingOpened = true
+        self.presenter?.isSettingOpened = true
         UIView.animate(withDuration: 0.5, animations: {
             self.settingsButtonContainerView.isHidden = false
             self.settingViewHeight.constant = 45
@@ -93,7 +94,7 @@ class MoviesCollectionController: UIViewController {
     
     //Hide setting View
     func hideSettingView() {
-        self.isSettingOpened = false
+        self.presenter?.isSettingOpened = false
         UIView.animate(withDuration: 0.5, animations: {
             
             self.settingViewHeight.constant = 0
@@ -106,7 +107,7 @@ class MoviesCollectionController: UIViewController {
     
     //MARK :- Get Movies list from server
     func getMovies(page: Int) {
-        if self.isSettingOpened == true {
+        if self.presenter?.isSettingOpened == true {
             self.hideSettingView()
         }
         presenter?.getMovies(pageCount: page) {[weak self] (result: Movies?, isSuccess: Bool) in
@@ -122,11 +123,12 @@ class MoviesCollectionController: UIViewController {
     func setUp() {
         searchBar.placeholder = "Search"
         collectionView?.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-        collectionView.register(UINib(nibName: "MoviesCollectionCell", bundle: Bundle.main), forCellWithReuseIdentifier: "MoviesCollectionCell")
+        collectionView.register(UINib(nibName: Identifier.moviesCollectionCell, bundle: Bundle.main), forCellWithReuseIdentifier: Identifier.moviesCollectionCell)
     }
-  
 }
-// MARK: Collection Delegates
+
+
+// MARK : Collection Delegates and Data Source
 extension MoviesCollectionController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -146,7 +148,7 @@ extension MoviesCollectionController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionCell", for: indexPath as IndexPath) as? MoviesCollectionCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.moviesCollectionCell, for: indexPath as IndexPath) as? MoviesCollectionCell else {
             fatalError("Constant.Message.cellNotFound")
         }
         if searchActive {
@@ -166,17 +168,18 @@ extension MoviesCollectionController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailsController") as? MovieDetailsController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: Identifier.movieDetailsController) as? MovieDetailsController
         if searchActive {
-            vc?.movie = presenter?.searchedMovies?.results[indexPath.row]
+            MoviesManager.shared.selectedMovie = presenter?.searchedMovies?.results[indexPath.row]
+            //vc?.movie = presenter?.searchedMovies?.results[indexPath.row]
         } else {
             switch self.presenter?.moviesType {
             case .popular?:
-                 vc?.movie = presenter?.popularMovies[indexPath.row]
+                 MoviesManager.shared.selectedMovie = presenter?.popularMovies[indexPath.row]
             case .topRated?:
-                 vc?.movie = presenter?.topRatedMovies[indexPath.row]
+                 MoviesManager.shared.selectedMovie = presenter?.topRatedMovies[indexPath.row]
             default:
-                vc?.movie = presenter?.popularMovies[indexPath.row]
+                MoviesManager.shared.selectedMovie = presenter?.popularMovies[indexPath.row]
             }
         }
         self.navigationController?.pushViewController(vc!, animated: true)
@@ -196,6 +199,9 @@ extension MoviesCollectionController: UICollectionViewDataSource, UICollectionVi
         let lastRowIndex = collectionView.numberOfItems(inSection: 0) - 1
        // print(lastRowIndex)
        // print(indexPath.row )
+        guard searchActive == false else {
+            return
+        }
         if indexPath.row == lastRowIndex {
             
             if let page = presenter?.movies?.page, let totalPage = presenter?.movies?.totalPages {
@@ -227,11 +233,12 @@ extension MoviesCollectionController: UISearchBarDelegate {
         } else {
             
             if searchText.count > 2 {
+                self.collectionView.reloadData()
                 self.searchMovie(string: searchText)
                 searchActive = true
             }
         }
-        collectionView.reloadData()
+        //collectionView.reloadData()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -261,14 +268,14 @@ extension MoviesCollectionController: UISearchBarDelegate {
             self.searchMovie(string: searchBar.text!)
             searchActive = true
         } else {
-             searchActive = false
+            searchActive = false
+            collectionView.reloadData()
         }
-        collectionView.reloadData()
     }
     
+    //Search movie on tmdb server
     func searchMovie(string: String) {
         self.hideSettingView()
-        
         presenter?.searchMovie(query: string) {[weak self] (result: Movies?, isSuccess: Bool) in
             if isSuccess {
                 DispatchQueue.main.async {
