@@ -104,6 +104,26 @@ class MoviesCollectionController: UIViewController {
         }
     }
     
+    //MARK :- Set collection view background if no movie result is coming from server
+    fileprivate func setCollectionbackgroundOnNoDataFromServer() {
+        switch self.presenter?.moviesType {
+        case .popular?:
+            if self.presenter?.popularMovies.count == 0 {
+                self.collectionView.backgroundView = self.presenter?.setCollectionBackgroundView(self.collectionView.frame)
+            } else {
+                self.collectionView.backgroundView = nil
+            }
+        case .topRated?:
+            if self.presenter?.topRatedMovies.count == 0 {
+                self.collectionView.backgroundView = self.presenter?.setCollectionBackgroundView(self.collectionView.frame)
+            } else {
+                self.collectionView.backgroundView = nil
+            }
+        default:
+            break
+        }
+        
+    }
     
     //MARK :- Get Movies list from server
     func getMovies(page: Int) {
@@ -113,7 +133,8 @@ class MoviesCollectionController: UIViewController {
         presenter?.getMovies(pageCount: page) {[weak self] (result: Movies?, isSuccess: Bool) in
             if isSuccess {
                 DispatchQueue.main.async {
-                     self?.collectionView.reloadData()
+                    self?.setCollectionbackgroundOnNoDataFromServer()
+                    self?.collectionView.reloadData()
                 }
             }
         }
@@ -238,7 +259,6 @@ extension MoviesCollectionController: UISearchBarDelegate {
                 searchActive = true
             }
         }
-        //collectionView.reloadData()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -246,14 +266,14 @@ extension MoviesCollectionController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
         searchActive = false
+        self.setCollectionbackgroundOnNoDataFromServer()
         collectionView.reloadData()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
-//        searchActive = false
-//        collectionView.reloadData()
+        self.setCollectionbackgroundOnNoDataFromServer()
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -262,9 +282,9 @@ extension MoviesCollectionController: UISearchBarDelegate {
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-       
-        if searchBar.text?.count != 0 {
+         searchBar.showsCancelButton = false
+         self.setCollectionbackgroundOnNoDataFromServer()
+         if searchBar.text?.count != 0 {
             self.searchMovie(string: searchBar.text!)
             searchActive = true
         } else {
@@ -279,6 +299,11 @@ extension MoviesCollectionController: UISearchBarDelegate {
         presenter?.searchMovie(query: string) {[weak self] (result: Movies?, isSuccess: Bool) in
             if isSuccess {
                 DispatchQueue.main.async {
+                    if self?.presenter?.searchedMovies?.results.count == 0 {
+                        self?.collectionView.backgroundView = self?.presenter?.setCollectionBackgroundView(self?.collectionView.frame ?? CGRect.zero)
+                    } else {
+                        self?.collectionView.backgroundView = nil
+                    }
                     self?.collectionView.reloadData()
                 }
             }

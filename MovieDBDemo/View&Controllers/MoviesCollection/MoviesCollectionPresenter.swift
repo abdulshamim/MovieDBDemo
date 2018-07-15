@@ -58,6 +58,17 @@ class MoviesCollectionPresenter: NSObject {
        
     }
     
+    func setCollectionBackgroundView(_ frame: CGRect) -> UIView {
+        let backgroundView = UIView()
+        backgroundView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        let label = UILabel(frame: CGRect(x: 0, y: frame.height/2 - 100, width: frame.width, height: 60))
+        label.text = "No movies found"
+        label.textColor = UIColor.black
+        label.textAlignment = NSTextAlignment.center
+        backgroundView.addSubview(label)
+        return backgroundView
+    }
+
    
     // MARK : Get Api path for popular and top rated
     func getFullPath() -> String {
