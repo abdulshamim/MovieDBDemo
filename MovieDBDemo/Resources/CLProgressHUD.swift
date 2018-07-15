@@ -40,8 +40,8 @@ class CLProgressHUD: MBProgressHUD {
     if sharedView != nil {
       sharedView.hide(animated: false)
     }
-    if let view = appDelegate.window {
-      sharedView = CLProgressHUD.showAdded(to: view, animated: true)
+    if let view = appDelegate?.window {
+        sharedView = CLProgressHUD.showAdded(to: view!, animated: true)
     }
     return sharedView
   }

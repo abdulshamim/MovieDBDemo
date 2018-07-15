@@ -27,26 +27,36 @@
                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Bud-c2-7Qm" customClass="RoundedCornersView" customModule="MovieDBDemo" customModuleProvider="target">
                         <rect key="frame" x="5" y="5" width="191" height="180"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="abdul" translatesAutoresizingMaskIntoConstraints="NO" id="Qbh-Ou-qhH">
-                                <rect key="frame" x="0.0" y="0.0" width="191" height="140"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="I9D-q8-IDI"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qbh-Ou-qhH">
+                                <rect key="frame" x="0.0" y="0.0" width="191" height="125"/>
+                                <color key="backgroundColor" red="0.65656775236129761" green="0.77949982881546021" blue="0.88517826795578003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abdul" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMJ-aK-8XC">
-                                <rect key="frame" x="8" y="142" width="175" height="36"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4q-c4-Rv5">
+                                <rect key="frame" x="0.0" y="125" width="191" height="55"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie title" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMJ-aK-8XC">
+                                        <rect key="frame" x="4" y="2" width="183" height="51"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sMJ-aK-8XC" secondAttribute="trailing" constant="4" id="12P-re-mxb"/>
+                                    <constraint firstAttribute="bottom" secondItem="sMJ-aK-8XC" secondAttribute="bottom" constant="2" id="8Kn-sG-OLZ"/>
+                                    <constraint firstAttribute="height" constant="55" id="8OU-ub-NAD"/>
+                                    <constraint firstItem="sMJ-aK-8XC" firstAttribute="top" secondItem="C4q-c4-Rv5" secondAttribute="top" constant="2" id="L7J-06-jNC"/>
+                                    <constraint firstItem="sMJ-aK-8XC" firstAttribute="leading" secondItem="C4q-c4-Rv5" secondAttribute="leading" constant="4" id="rzx-Se-g9v"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.87843137250000003" green="0.2784313725" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="sMJ-aK-8XC" secondAttribute="bottom" constant="2" id="J3f-yp-NVN"/>
-                            <constraint firstAttribute="trailing" secondItem="sMJ-aK-8XC" secondAttribute="trailing" constant="8" id="Kfj-ef-tUS"/>
+                            <constraint firstAttribute="bottom" secondItem="C4q-c4-Rv5" secondAttribute="bottom" id="4oo-pD-F0K"/>
+                            <constraint firstItem="C4q-c4-Rv5" firstAttribute="leading" secondItem="Bud-c2-7Qm" secondAttribute="leading" id="DXw-pw-hbf"/>
                             <constraint firstItem="Qbh-Ou-qhH" firstAttribute="top" secondItem="Bud-c2-7Qm" secondAttribute="top" id="atO-zW-aOQ"/>
-                            <constraint firstItem="sMJ-aK-8XC" firstAttribute="top" secondItem="Qbh-Ou-qhH" secondAttribute="bottom" constant="2" id="cDf-OR-ATV"/>
-                            <constraint firstItem="sMJ-aK-8XC" firstAttribute="leading" secondItem="Bud-c2-7Qm" secondAttribute="leading" constant="8" id="mFc-BT-bwZ"/>
+                            <constraint firstAttribute="trailing" secondItem="C4q-c4-Rv5" secondAttribute="trailing" id="csV-li-qSq"/>
+                            <constraint firstItem="C4q-c4-Rv5" firstAttribute="top" secondItem="Qbh-Ou-qhH" secondAttribute="bottom" id="mnv-92-DzI"/>
                             <constraint firstAttribute="trailing" secondItem="Qbh-Ou-qhH" secondAttribute="trailing" id="wpB-LY-wwJ"/>
                             <constraint firstItem="Qbh-Ou-qhH" firstAttribute="leading" secondItem="Bud-c2-7Qm" secondAttribute="leading" id="xBK-84-xcd"/>
                         </constraints>
@@ -58,6 +68,7 @@
                     </view>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Bud-c2-7Qm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Ce0-Ix-GRK"/>
                 <constraint firstAttribute="bottom" secondItem="Bud-c2-7Qm" secondAttribute="bottom" constant="5" id="jzI-E8-ZdC"/>
@@ -67,13 +78,10 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="201" height="190"/>
             <connections>
-                <outlet property="imageView" destination="Qbh-Ou-qhH" id="ePp-5X-uBY"/>
+                <outlet property="posterImage" destination="Qbh-Ou-qhH" id="7G7-UE-DMY"/>
                 <outlet property="titleLabel" destination="sMJ-aK-8XC" id="vvq-tM-BXv"/>
             </connections>
             <point key="canvasLocation" x="205.5" y="124"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="abdul" width="780" height="1040"/>
-    </resources>
 </document>

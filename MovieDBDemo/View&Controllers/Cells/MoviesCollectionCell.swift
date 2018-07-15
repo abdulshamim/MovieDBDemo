@@ -8,18 +8,25 @@
 
 import UIKit
 
+
 class MoviesCollectionCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.backgroundColor = .clear
     }
 
-    func setUpData(result: Result) {
-        self.titleLabel.text = result.originalTitle
+    func setUpData(result: Result?) {
+        if let result = result {
+            self.titleLabel.text = result.title  ?? ""
+            let imagePath = API.imageBaseUrl + (result.posterPath ?? "")
+            self.posterImage.contentMode = .scaleToFill
+            self.posterImage.kf.setImage(with: URL(string: imagePath)!, placeholder: nil)
+        }
     }
 }

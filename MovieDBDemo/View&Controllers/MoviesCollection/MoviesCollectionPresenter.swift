@@ -8,62 +8,120 @@
 
 import Foundation
 
-struct API {
-    static let key = "99c18e1c69dfb00bde386112c0080835"
-    static let baseUrl = "https://api.themoviedb.org/3/"
-    
-    struct Path {
-       static let popular = baseUrl + "movie/popular?api_key=\(key)"
-       static let topRated = baseUrl + "movie/top-rated?api_key=\(key)"
-    }
-}
 
-enum MoviesType: Int{
-    case popular = 0
-    case topRated = 1
-}
 
-class MoviesCollectionPresenter {
+
+class MoviesCollectionPresenter: NSObject {
+
+    var popularMoviesPageCount: Int? = 1
+    var popularMovies = [Result]()
     
+    var topRatedPageCount: Int? = 1
+    var topRatedMovies = [Result]()
+    
+    var searchedMovies: Movies?
     var movies: Movies?
     var moviesType: MoviesType = .popular
     
-    init() {
+    weak var moviesCollectionController: MoviesCollectionController?
+    
+    override init() {
         
     }
+    
+    init(viewController: MoviesCollectionController) {
+        super.init()
+    }
+    
+    //SetUp Naviation controller
+    func setUpNavigationBar(vc: MoviesCollectionController) {
+        vc.title = ListType.popular
+        vc.navigationController?.navigationBar.prefersLargeTitles = true
+        vc.navigationController?.navigationBar.barTintColor = UIColor.red
+        vc.navigationController?.navigationBar.tintColor = .white
+        vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        vc.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    }
+    
+   
+    
     func getFullPath() -> String {
         switch moviesType {
         case .popular:
             return  API.Path.popular
         case .topRated:
-            return  API.Path.popular
+            return  API.Path.topRated
         }
     }
     
-    func getMovies(callBack : @escaping (_ result: Movies?, _ isSuccess: Bool) -> Void) {
-        let path = getFullPath()
+    func getMovies(pageCount: Int, callBack : @escaping (_ result: Movies?, _ isSuccess: Bool) -> Void) {
+        let path = getFullPath() + "&language=en-US&page=\(pageCount)"
         print(path)
+        
+        DispatchQueue.main.async {
+           UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+       
         NetworkingClass(path: path,
             method: .get)
             .config(activityIndicatorEnable: false)
             .connectServerWithoutImage(delay: 0){(_ response: Any?, data: Data?, error: Error?) in
                 
                 print("\(String(describing: response))")
-                guard let data = data else {
+                guard let response = response as? [String: Any] else {
                     callBack(nil , false)
                     return
                 }
                 
-                do {
-                    self.movies = try JSONDecoder().decode(Movies.self, from: data)
-                    print(self.movies)
-                    callBack(self.movies! , true)
-                } catch {
-                    callBack(nil , false)
+                self.movies = Movies(json: response)
+                for movie in self.movies?.results ?? [] {
+                    switch self.moviesType {
+                    case .popular:
+                        self.popularMoviesPageCount = self.movies?.page
+                        self.popularMovies.append(movie)
+                    case .topRated:
+                        self.topRatedMovies.append(movie)
+                        self.topRatedPageCount = self.movies?.page
+                    }
+                    
                 }
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                
+                callBack(self.movies! , true)
                 
         }
         
     }
     
+    
+    func searchMovie(query: String, callBack : @escaping (_ result: Movies?, _ isSuccess: Bool) -> Void) {
+        let searchTerm =  "&query=\(query)"
+        let path = API.Path.search + searchTerm
+        print(path)
+        //
+        DispatchQueue.main.async {
+            CLProgressHUD.present(animated: true)
+        }
+        
+        NetworkingClass(path: path,
+                        method: .get)
+            .config(activityIndicatorEnable: false)
+            .connectServerWithoutImage(delay: 0){(_ response: Any?, data: Data?, error: Error?) in
+                DispatchQueue.main.async {
+                    CLProgressHUD.dismiss(animated: true)
+                }
+                print("\(String(describing: response))")
+                guard let response = response as? [String: Any] else {
+                    callBack(nil , false)
+                    return
+                }
+                
+                self.searchedMovies = Movies(json: response)
+                print(self.movies)
+                callBack(self.movies! , true)
+                
+        }
+    }
 }

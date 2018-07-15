@@ -6,53 +6,113 @@
 //  Copyright © 2018 Abdul Shamim. All rights reserved.
 //
 
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
+
 import Foundation
 
-struct Movies: Codable {
-    let page, totalResults, totalPages: Int
-    let results: [Result]
+class Movies: Codable {
+    var page: Int?
+    var totalResults: Int?
+    var totalPages: Int?
+    var results = [Result]()
     
-    enum CodingKeys: String, CodingKey {
-        case page
-        case totalResults = "total_results"
-        case totalPages = "total_pages"
-        case results
+    
+    init(json: [String: Any]) {
+        if let page = json["page"] as? Int {
+            self.page = page
+        }
+        if let totalResults = json["total_results"] as? Int {
+            self.totalResults = totalResults
+        }
+        
+        if let totalPages = json["total_pages"] as? Int {
+            self.totalPages = totalPages
+        }
+        
+        if let results = json["results"] as? [[String: Any]] {
+            for result in results {
+                let object = Result(json: result)
+                self.results.append(object)
+            }
+        }
     }
 }
 
-struct Result: Codable {
-    let voteCount, id: Int
-    let video: Bool
-    let voteAverage: Double
-    let title: String
-    let popularity: Double
-    let posterPath: String
-    let originalLanguage: OriginalLanguage
-    let originalTitle: String
-    let genreIDS: [Int]
-    let backdropPath: String
-    let adult: Bool
-    let overview, releaseDate: String
+class Result: Codable {
+    var voteCount: Int?
+    var id: Int?
+    var video: Bool?
+    var voteAverage: Double?
+    var title: String?
+    var popularity: Double?
+    var posterPath: String?
+    var originalLanguage: String?
+    var originalTitle: String?
+    var genreIDS = [Int]()
+    var backdropPath: String?
+    var adult: Bool?
+    var overview: String?
+    var releaseDate: String?
     
-    enum CodingKeys: String, CodingKey {
-        case voteCount = "vote_count"
-        case id, video
-        case voteAverage = "vote_average"
-        case title, popularity
-        case posterPath = "poster_path"
-        case originalLanguage = "original_language"
-        case originalTitle = "original_title"
-        case genreIDS = "genre_ids"
-        case backdropPath = "backdrop_path"
-        case adult, overview
-        case releaseDate = "release_date"
+    init(json: [String: Any]) {
+        if let voteCount = json["vote_count"] as? Int {
+            self.voteCount = voteCount
+        }
+        
+        if let id = json["id"] as? Int {
+            self.id = id
+        }
+        
+        if let video = json["video"] as? Bool {
+            self.video = video
+        }
+        if let voteAverage = json["vote_average"] as? Double {
+            self.voteAverage = voteAverage
+        }
+        
+        if let title = json["title"] as? String {
+            self.title = title
+        }
+        
+        if let popularity = json["popularity"] as? Double {
+            self.popularity = popularity
+        }
+        
+        if let posterPath = json["poster_path"] as? String {
+            self.posterPath = posterPath
+        }
+        
+        if let originalLanguage = json["original_language"] as? String {
+            self.originalLanguage = originalLanguage
+        }
+        
+        if let originalTitle = json["original_title"] as? String {
+            self.originalTitle = originalTitle
+        }
+        
+        if let genreIDS = json["genre_ids"] as? [Int] {
+            self.genreIDS = genreIDS
+        }
+        
+        if let backdropPath = json["backdrop_path"] as? String {
+            self.backdropPath = backdropPath
+        }
+        if let adult = json["adult"] as? Bool {
+            self.adult = adult
+        }
+        
+        if let overview = json["overview"] as? String {
+            self.overview = overview
+        }
+        
+        if let releaseDate = json["release_date"] as? String {
+            self.releaseDate = releaseDate
+        }
     }
+    
+    
 }
 
-enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case hi = "hi"
-    case it = "it"
-    case ja = "ja"
-}
 

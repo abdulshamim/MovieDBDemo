@@ -10,26 +10,41 @@ import UIKit
 
 class MovieDetailsController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var movie: Result?
+    
+    var movieDetailsPresenter: MovieDetailsPresenter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        movieDetailsPresenter = MovieDetailsPresenter(viewController: self)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = movie?.originalTitle
+        movieDetailsPresenter?.setTableView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+}
+
+extension MovieDetailsController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell", for: indexPath) as? MovieDetailCell else {
+            fatalError("cell not found")
+        }
+        cell.setUpData(movie: self.movie)
+        return cell
     }
-    */
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
 
 }

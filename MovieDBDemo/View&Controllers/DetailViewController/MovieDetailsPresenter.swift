@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class MovieDetailsPresenter: NSObject {
+    
+    weak var movieDetailsController: MovieDetailsController?
+    
+
+    init(viewController: MovieDetailsController) {
+        super.init()
+        self.movieDetailsController = viewController
+    }
+    
+    func setTableView() {
+        movieDetailsController?.tableView.dataSource = movieDetailsController
+        movieDetailsController?.tableView.separatorStyle = .none
+        movieDetailsController?.tableView.estimatedRowHeight = 550
+    }
+}
