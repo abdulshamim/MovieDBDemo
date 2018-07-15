@@ -30,7 +30,7 @@ class MovieDetailCell: UITableViewCell {
     
     func setUpData(movie: Result?) {
         if let movie = movie {
-            self.movieTitleLabel.text = movie.title ?? ""
+            self.movieTitleLabel.text = movie.originalTitle ?? ""
             self.ratingLabel.text = "\(String(describing: movie.voteAverage ?? 0))"
             self.releaseDateLabel.text = "Release Date: " + (movie.releaseDate ?? "")
             self.overviewLabel.text = movie.overview
@@ -38,8 +38,8 @@ class MovieDetailCell: UITableViewCell {
             let imagePath = API.imageBaseUrl + (movie.posterPath ?? "")
             print(imagePath)
             self.posterImage.contentMode = .scaleToFill
+            self.posterImage.kf.indicatorType = .activity
             self.posterImage.kf.setImage(with: URL(string: imagePath)!, placeholder: nil)
-//            self.posterImage.image = self.posterImage.image?.scaled(to: posterImage.frame.size, scalingMode: .aspectFill)
         }
     }
 }

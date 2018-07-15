@@ -26,6 +26,7 @@ class MoviesCollectionCell: UICollectionViewCell {
             self.titleLabel.text = result.title  ?? ""
             let imagePath = API.imageBaseUrl + (result.posterPath ?? "")
             self.posterImage.contentMode = .scaleToFill
+            self.posterImage.kf.indicatorType = .activity
             self.posterImage.kf.setImage(with: URL(string: imagePath)!, placeholder: nil)
         }
     }
