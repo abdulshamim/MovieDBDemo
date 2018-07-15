@@ -6,7 +6,7 @@
 //  Copyright © 2018 Abdul Shamim. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 let appDelegate = UIApplication.shared.delegate
 

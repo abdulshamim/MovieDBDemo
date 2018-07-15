@@ -9,6 +9,6 @@ target 'MovieDBDemo' do
    pod 'Alamofire', '~> 4.2.0'
    pod 'Kingfisher'
    #pod 'AFNetworking', '~> 3.0'
-   pod 'MBProgressHUD'
+   #pod 'MBProgressHUD'
    
 end

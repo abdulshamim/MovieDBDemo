@@ -24,7 +24,6 @@
 		4E92256220F9EDA40056D2D8 /* MovieDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256120F9EDA40056D2D8 /* MovieDetailCell.swift */; };
 		4E92256420F9EFB90056D2D8 /* MovieDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256320F9EFB90056D2D8 /* MovieDetailsPresenter.swift */; };
 		4E92256720FA2BA70056D2D8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256620FA2BA70056D2D8 /* Extensions.swift */; };
-		4E92256C20FA3CD90056D2D8 /* CLProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256B20FA3CD80056D2D8 /* CLProgressHUD.swift */; };
 		4E92256E20FA3D200056D2D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256D20FA3D200056D2D8 /* Constants.swift */; };
 		4E92257020FA50280056D2D8 /* SerachMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92256F20FA50280056D2D8 /* SerachMovieModel.swift */; };
 /* End PBXBuildFile section */
@@ -50,7 +49,6 @@
 		4E92256320F9EFB90056D2D8 /* MovieDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsPresenter.swift; sourceTree = "<group>"; };
 		4E92256620FA2BA70056D2D8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4E92256820FA3C700056D2D8 /* MovieDBDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieDBDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		4E92256B20FA3CD80056D2D8 /* CLProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProgressHUD.swift; sourceTree = "<group>"; };
 		4E92256D20FA3D200056D2D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4E92256F20FA50280056D2D8 /* SerachMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachMovieModel.swift; sourceTree = "<group>"; };
 		80F62CB68E6878292DD26C24 /* Pods-MovieDBDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDBDemo/Pods-MovieDBDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 		4E92256520FA2B8E0056D2D8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4E92256B20FA3CD80056D2D8 /* CLProgressHUD.swift */,
 				4E92256620FA2BA70056D2D8 /* Extensions.swift */,
 				4E92256D20FA3D200056D2D8 /* Constants.swift */,
 			);
@@ -301,13 +298,11 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieDBDemo/Pods-MovieDBDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -347,7 +342,6 @@
 				4E5DDB6E20F920A9007670F7 /* ViewController.swift in Sources */,
 				4E92256220F9EDA40056D2D8 /* MovieDetailCell.swift in Sources */,
 				4E92256720FA2BA70056D2D8 /* Extensions.swift in Sources */,
-				4E92256C20FA3CD90056D2D8 /* CLProgressHUD.swift in Sources */,
 				4E5DDB9A20F94D2D007670F7 /* MoviesCollectionController.swift in Sources */,
 				4E5DDB6C20F920A9007670F7 /* AppDelegate.swift in Sources */,
 				4E92256E20FA3D200056D2D8 /* Constants.swift in Sources */,

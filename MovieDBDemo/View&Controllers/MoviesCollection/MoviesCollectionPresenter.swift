@@ -6,7 +6,7 @@
 //  Copyright © 2018 Abdul Shamim. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 
@@ -102,24 +102,26 @@ class MoviesCollectionPresenter: NSObject {
         print(path)
         //
         DispatchQueue.main.async {
-            CLProgressHUD.present(animated: true)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
         
         NetworkingClass(path: path,
                         method: .get)
             .config(activityIndicatorEnable: false)
             .connectServerWithoutImage(delay: 0){(_ response: Any?, data: Data?, error: Error?) in
-                DispatchQueue.main.async {
-                    CLProgressHUD.dismiss(animated: true)
-                }
+               
                 print("\(String(describing: response))")
                 guard let response = response as? [String: Any] else {
                     callBack(nil , false)
                     return
                 }
                 
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                
                 self.searchedMovies = Movies(json: response)
-                print(self.movies)
+                print(self.movies ?? "Movie not found")
                 callBack(self.movies! , true)
                 
         }
